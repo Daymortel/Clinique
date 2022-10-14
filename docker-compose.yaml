@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+    srv:
+        image: node:alpine
+        working_dir: /app
+        command: sh -c "cd docker-nest && npm run start:dev"
+        volumes: 
+            - $PWD:/app
+        ports:
+            - 3000:3000
+        links:
+            - bdd
+    bdd:
+        image: postgres:alpine
+        environment:
+            - POSTGRES_PASSWORD=dev
